@@ -7,13 +7,7 @@ const databaseName =
 const config = {
   logging: false,
 };
-//***************************************************** */
-Order.belongsToMany(Product, { through: OrderDetails });
-Product.belongsToMany(Order, { through: OrderDetails });
-if (process.env.LOGGING === "true") {
-  delete config.logging;
-}
-//***************************************************** */
+
 //https://stackoverflow.com/questions/61254851/heroku-postgres-sequelize-no-pg-hba-conf-entry-for-host
 if (process.env.DATABASE_URL) {
   config.dialectOptions = {
