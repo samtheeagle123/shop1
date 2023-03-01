@@ -2,7 +2,8 @@
 
 const {
   db,
-  models: { User, Product },
+  models: { User, Products },
+  
 } = require("../server/db");
 
 const products = [
@@ -89,7 +90,7 @@ async function seed() {
   console.log(`seeded ${users.length} users`);
 
   const productsCreated = await Promise.all(
-    products.map(product => Product.create(product))
+    products.map(products => Products.create(products))
   );
 
   console.log(`seeded ${productsCreated.length} products`);
