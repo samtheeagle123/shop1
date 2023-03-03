@@ -1,3 +1,4 @@
+const {models: { User }} = require("./db");
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')

@@ -9,6 +9,7 @@ const Product = require("./models/Product");
 
 //associations could go here!
 //***************************************************** */
+User.hasMany(Order)
 Order.belongsToMany(Product, { through: OrderDetail });
 Product.belongsToMany(Order, { through: OrderDetail });
 if (process.env.LOGGING === "true") {
