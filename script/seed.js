@@ -2,7 +2,7 @@
 
 const {db, models: {User} } = require('../server/db')
 
-const user = [
+const users = [
   {
     username:'SmileyPenguin23',
     firstName:'Adrian ',
@@ -54,20 +54,6 @@ const user = [
     lastName:' Thompson',
   },
 ]
-//lets seed the users
-const seed = async () => {
-  try {
-    await db.sync({force: true})
-    await Promise.all(user.map((user) => User.create(user)))
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-module.exports = seed
-
-
-
 
 /**
  * seed - this function clears the database, updates tables to
