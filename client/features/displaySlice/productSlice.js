@@ -11,6 +11,21 @@ export const fetchProductsAsync = createAsyncThunk("allProducts", async () => {
     console.log(err);
   }
 });
+export const createAddProductAsync = createAsyncThunk(
+  "product/add",
+  async ({ Price }) => {
+    try {
+      const { data } = await axios.post("/api/products", {
+        Price,
+      });
+      return data;
+    } catch (error) {
+      console.error("Error Adding Products!: ", error);
+      throw error; // re-throw the error to trigger the rejected state of the thunk
+    }
+  }
+);
+
 
 const productSlice = createSlice({
   name: "products",
@@ -19,6 +34,9 @@ const productSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(fetchProductsAsync.fulfilled, (state, action) => {
       return action.payload;
+    });
+    builder.addCase(createAddProductAsync.fulfilled, (state, action) => {
+      state.push(action.payload);
     });
   },
 });
