@@ -2,6 +2,73 @@
 
 const {db, models: {User} } = require('../server/db')
 
+const user = [
+  {
+    username:'SmileyPenguin23',
+    firstName:'Adrian ',
+    lastName:'Greene',
+  },
+  {
+    username:'TechNinja007',
+    firstName:'Maya',
+    lastName:'Patel',
+  },
+  {
+    username:'HappyTurtle99',
+    firstName:'Tyler ',
+    lastName:' Davis',
+  },
+  {
+    username:'CaptainMarvelous',
+    firstName:'Leah  ',
+    lastName:'Kim',
+  },
+  {
+    username:'BlueSapphire88',
+    firstName:'Evan',
+    lastName:' Nguyen ',
+  },
+  {
+    username:'CosmicFalcon42',
+    firstName:'Zoe',
+    lastName:' Jackson',
+  },
+  {
+    username:'SilverDragonfly',
+    firstName:'Caleb ',
+    lastName:'Smith',
+  },
+  {
+    username:'SkyGazer21',
+    firstName:'Ava',
+    lastName:' Brown',
+  },
+  {
+    username:'OceanBreeze77',
+    firstName:'Ryan',
+    lastName:' Lee',
+  },
+  {
+    username:'Thunderbolt54',
+    firstName:'Mia',
+    lastName:' Thompson',
+  },
+]
+//lets seed the users
+const seed = async () => {
+  try {
+    await db.sync({force: true})
+    await Promise.all(user.map((user) => User.create(user)))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+module.exports = seed
+
+
+
+
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.

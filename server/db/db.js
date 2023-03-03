@@ -19,7 +19,7 @@ if (process.env.DATABASE_URL) {
 
 const db = new Sequelize(
   process.env.DATABASE_URL ||
-    `postgres://postgres:123@localhost:5432/${databaseName}`,
+    'postgres://localhost:5432/fs_app_template',
   config
 );
 module.exports = db;
