@@ -1,17 +1,19 @@
-const router = require('express').Router()
-const { models: { User }} = require('../db')
-module.exports = router
+const router = require("express").Router();
+const {
+  models: { User },
+} = require("../db");
+module.exports = router;
 
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const users = await User.findAll({
-    attributes: ['username','firstName', 'lastName']
-    })
-    res.json(users)
+      attributes: ["username", "firstName", "lastName"],
+    });
+    res.json(users);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 router.get("/:userId", async (req, res, next) => {
   try {

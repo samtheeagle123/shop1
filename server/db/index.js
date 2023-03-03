@@ -5,11 +5,11 @@ const db = require("./db");
 const User = require("./models/User");
 const Order = require("./models/Order");
 const OrderDetail = require("./models/OrderDetail");
-const Product = require("./models/Product");
+const Product = require("./models/Products");
 
 //associations could go here!
 //***************************************************** */
-User.hasMany(Order)
+User.hasMany(Order);
 Order.belongsToMany(Product, { through: OrderDetail });
 Product.belongsToMany(Order, { through: OrderDetail });
 if (process.env.LOGGING === "true") {
