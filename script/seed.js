@@ -2,6 +2,15 @@
 
 const {db, models: {User} } = require('../server/db')
 
+const characters =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+const generatePass = (len) => {
+  let result = "";
+  for (let i = 0; i < len; i++)
+  result += characters.charAt(0, characters.length - 1);
+  return result;
+}
 const users = [
   {
     username:'SmileyPenguin23',
@@ -55,6 +64,12 @@ const users = [
   },
 ]
 
+const roles = ['ADMIN','DEVELOPER', 'CUSTOMER']
+
+users.forEach((m) => {
+  m.role = roles[0, roles.length - 1];
+  m.password = generatePass(10);
+});
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
