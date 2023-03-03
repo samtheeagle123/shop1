@@ -1,68 +1,19 @@
-'use strict'
+"use strict";
 
-const {db, models: {User, Products } } = require('../server/db')
+const {
+  db,
+  models: { User, Product },
+} = require("../server/db");
 
 const characters =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-const generatePass = (len) => {
+const generatePass = len => {
   let result = "";
   for (let i = 0; i < len; i++)
-  result += characters.charAt(0, characters.length - 1);
+    result += characters.charAt(0, characters.length - 1);
   return result;
-}
-const users = [
-  {
-    username:'SmileyPenguin23',
-    firstName:'Adrian ',
-    lastName:'Greene',
-  },
-  {
-    username:'TechNinja007',
-    firstName:'Maya',
-    lastName:'Patel',
-  },
-  {
-    username:'HappyTurtle99',
-    firstName:'Tyler ',
-    lastName:' Davis',
-  },
-  {
-    username:'CaptainMarvelous',
-    firstName:'Leah  ',
-    lastName:'Kim',
-  },
-  {
-    username:'BlueSapphire88',
-    firstName:'Evan',
-    lastName:' Nguyen ',
-  },
-  {
-    username:'CosmicFalcon42',
-    firstName:'Zoe',
-    lastName:' Jackson',
-  },
-  {
-    username:'SilverDragonfly',
-    firstName:'Caleb ',
-    lastName:'Smith',
-  },
-  {
-    username:'SkyGazer21',
-    firstName:'Ava',
-    lastName:' Brown',
-  },
-  {
-    username:'OceanBreeze77',
-    firstName:'Ryan',
-    lastName:' Lee',
-  },
-  {
-    username:'Thunderbolt54',
-    firstName:'Mia',
-    lastName:' Thompson',
-  },
-]
+};
 
 const products = [
   {
@@ -137,10 +88,63 @@ const products = [
   },
 ];
 
-const roles = ['ADMIN','DEVELOPER', 'CUSTOMER']
+const users = [
+  {
+    username: "SmileyPenguin23",
+    firstName: "Adrian ",
+    lastName: "Greene",
+  },
+  {
+    username: "TechNinja007",
+    firstName: "Maya",
+    lastName: "Patel",
+  },
+  {
+    username: "HappyTurtle99",
+    firstName: "Tyler ",
+    lastName: " Davis",
+  },
+  {
+    username: "CaptainMarvelous",
+    firstName: "Leah  ",
+    lastName: "Kim",
+  },
+  {
+    username: "BlueSapphire88",
+    firstName: "Evan",
+    lastName: " Nguyen ",
+  },
+  {
+    username: "CosmicFalcon42",
+    firstName: "Zoe",
+    lastName: " Jackson",
+  },
+  {
+    username: "SilverDragonfly",
+    firstName: "Caleb ",
+    lastName: "Smith",
+  },
+  {
+    username: "SkyGazer21",
+    firstName: "Ava",
+    lastName: " Brown",
+  },
+  {
+    username: "OceanBreeze77",
+    firstName: "Ryan",
+    lastName: " Lee",
+  },
+  {
+    username: "Thunderbolt54",
+    firstName: "Mia",
+    lastName: " Thompson",
+  },
+];
 
-users.forEach((m) => {
-  m.role = roles[0, roles.length - 1];
+const roles = ["ADMIN", "DEVELOPER", "CUSTOMER"];
+
+users.forEach(m => {
+  m.role = roles[(0, roles.length - 1)];
   m.password = generatePass(10);
 });
 /**
@@ -148,28 +152,30 @@ users.forEach((m) => {
  *      match the models, and populates the database.
  */
 async function seed() {
-  await db.sync({ force: true }) // clears db and matches models to tables
-  console.log('db synced!')
+  await db.sync({ force: true }); // clears db and matches models to tables
+  console.log("db synced!");
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
-  ])
-  
+    User.create({ username: "cody", password: "123" }),
+    User.create({ username: "murphy", password: "123" }),
+  ]);
+  console.log(`seeded ${users.length} users`);
+
+  console.log(products);
+
   const productsCreated = await Promise.all(
-    products.map(products => Products.create(products))
+    products.map(products => Product.create(products))
   );
 
   console.log(`seeded ${productsCreated.length} products`);
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
+  console.log(`seeded successfully`);
   return {
     users: {
       cody: users[0],
-      murphy: users[1]
-    }
-  }
+      murphy: users[1],
+    },
+  };
 }
 
 /*
@@ -178,16 +184,16 @@ async function seed() {
  The `seed` function is concerned only with modifying the database.
 */
 async function runSeed() {
-  console.log('seeding...')
+  console.log("seeding...");
   try {
-    await seed()
+    await seed();
   } catch (err) {
-    console.error(err)
-    process.exitCode = 1
+    console.error(err);
+    process.exitCode = 1;
   } finally {
-    console.log('closing db connection')
-    await db.close()
-    console.log('db connection closed')
+    console.log("closing db connection");
+    await db.close();
+    console.log("db connection closed");
   }
 }
 
@@ -197,8 +203,8 @@ async function runSeed() {
   any errors that might occur inside of `seed`.
 */
 if (module === require.main) {
-  runSeed()
+  runSeed();
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = seed;
