@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
+const { ENUM } = require('sequelize');
 
 const SALT_ROUNDS = 5;
 
@@ -13,6 +14,9 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
+  },
+  role: {
+    type: ENUM(['ADMIN','DEVELOPER', 'CUSTOMER'])
   }
 })
 
