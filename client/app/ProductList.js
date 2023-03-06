@@ -4,7 +4,9 @@ import {
   fetchProductsAsync,
   selectProducts,
   createAddProductAsync,
+  addToCart,
 } from "../features/displaySlice/productSlice.js";
+import { Link } from "react-router-dom";
 
 function ProductList() {
   const dispatch = useDispatch();
@@ -14,8 +16,8 @@ function ProductList() {
     dispatch(fetchProductsAsync());
   }, [dispatch]);
 
-  const handleAddToCart = (productId, orderId) => {
-    dispatch(createAddProductAsync({ productId}));
+  const handleAddToCart = product => {
+    dispatch(addToCart(product));
   };
 
   return (
@@ -27,6 +29,7 @@ function ProductList() {
           <p>{product.Desc}</p>
           <p>{product.Price}</p>
           <img src={product.imageUrl}></img>
+          <Link to={`/singleProduct/${product.id}`}>View details</Link>
           <button onClick={() => handleAddToCart(product.id)}>
             Add to Cart
           </button>
