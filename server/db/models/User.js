@@ -21,9 +21,10 @@ const User = db.define("user", {
   lastName: {
     type: Sequelize.STRING,
   },
-  role: {
-    type: Sequelize.ENUM(["ADMIN", "DEVELOPER", "CUSTOMER"]),
-  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }
 });
 
 module.exports = User;

@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:userId", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.userId);
     res.send(user);
@@ -23,3 +23,30 @@ router.get("/:userId", async (req, res, next) => {
     next(error);
   }
 });
+
+router.put("/:id", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId);
+    const updatedUser = await user.update(req.body);
+    res.send(updatedUser);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+      const user = await User.findByPk(req.params.id);
+      if (user) {
+          await user.destroy();
+          res.status(204).end();
+      } else {
+          res.status(404).json({ message: 'User not found' });
+      }
+  } catch (err) {
+      next(err)
+  }
+});
+
+
+
