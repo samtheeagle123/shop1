@@ -5,26 +5,23 @@ import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/home/Home";
 import { me } from "./store";
 import ProductList from "./ProductList";
-<<<<<<< HEAD
 import SingleProduct from "./SingleProduct";
-=======
 import { fetchUsersAsync } from "../Slices/userSlice";
 import Users from "../features/Customers/AllCustomers";
 import User from "../features/Customers/SingleCustomer";
->>>>>>> main
 
 /**
  * COMPONENT
  */
 
 const AppRoutes = () => {
-  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
-  const userId = useSelector((state) => state.auth.me.id);
+  const isLoggedIn = useSelector(state => !!state.auth.me.id);
+  const userId = useSelector(state => state.auth.me.id);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(me());
-    dispatch(fetchUsersAsync)
+    dispatch(fetchUsersAsync);
   }, [dispatch]);
 
   return (
@@ -54,8 +51,6 @@ const AppRoutes = () => {
           />
           <Route path="/products" element={<ProductList />} />
           <Route path="/products/:productId" element={<SingleProduct />} />
-       
-         
         </Routes>
       )}
     </div>
