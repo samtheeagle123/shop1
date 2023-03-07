@@ -5,13 +5,10 @@ import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/home/Home";
 import { me } from "./store";
 import ProductList from "./ProductList";
-<<<<<<< HEAD
 import Contact from "../features/Contact/contact"
-=======
 import { fetchUsersAsync } from "../Slices/userSlice";
 import Users from "../features/Customers/AllCustomers";
 import User from "../features/Customers/SingleCustomer";
->>>>>>> main
 
 /**
  * COMPONENT
@@ -20,6 +17,7 @@ import User from "../features/Customers/SingleCustomer";
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const userId = useSelector((state) => state.auth.me.id);
+  const isAdmin = useSelector(state => state.auth.me.isAdmin)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,44 +26,72 @@ const AppRoutes = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      {isLoggedIn ? (
-        <Routes>
-          <Route path="/*" element={<Home />} />
-          <Route to="/home" element={<Home />} />
-          <Route path="/products" element={<ProductList />} />
-<<<<<<< HEAD
-          <Route path="/contact" element={<Contact />} />
-=======
-          <Route path="/users" element={<Users />} />
-          <Route path="/users/:id" element={<User userId={userId} />} />
->>>>>>> main
-        </Routes>
-      ) : (
-        <Routes>
-          <Route
-            path="/*"
-            element={<AuthForm name="login" displayName="Login" />}
-          />
-          <Route
-            path="/login"
-            element={<AuthForm name="login" displayName="Login" />}
-          />
-          <Route
-            path="/signup"
-            element={<AuthForm name="signup" displayName="Sign Up" />}
-          />
-          <Route path="/products" element={<ProductList />} />
-<<<<<<< HEAD
-          <Route path="/about" />
-          <Route path="/contact" />
-          <Route path="/cart" />
-=======
+    // <div>
+    //   {isLoggedIn ? (
+    //     <Routes>
+    //       <Route path="/*" element={<Home />} />
+    //       <Route to="/home" element={<Home />} />
+    //       <Route path="/products" element={<ProductList />} />
+    //       <Route path="/contact" element={<Contact />} />
+    //       <Route path="/users" element={<Users />} />
+    //       <Route path="/users/:id" element={<User userId={userId} />} />
+    //     </Routes>
+    //   ) : (
+    //     <Routes>
+    //       <Route
+    //         path="/*"
+    //         element={<AuthForm name="login" displayName="Login" />}
+    //       />
+    //       <Route
+    //         path="/login"
+    //         element={<AuthForm name="login" displayName="Login" />}
+    //       />
+    //       <Route
+    //         path="/signup"
+    //         element={<AuthForm name="signup" displayName="Sign Up" />}
+    //       />
+    //       <Route path="/products" element={<ProductList />} />
+    //       <Route path="/about" />
+    //       <Route path="/contact" />
+    //       <Route path="/cart" />
        
          
->>>>>>> main
+    //     </Routes>
+    //   )}
+    // </div>
+
+    <div>
+        {(() => {
+          if (isAdmin) {
+            return (    
+                <Routes>
+                  <Route path="/*" element={<Home />} />
+                  <Route to="/home" element={<Home />} />
+                  <Route path="/products" element={<ProductList />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/users" element={<Users />} />
+                  <Route path="/users/:id" element={<User userId={userId} />} />
+                </Routes>
+            )
+          } else if (isLoggedIn) {
+            return (
+                <Routes>
+                  <Route path="/*" element={<Home />} />
+                  <Route to="/home" element={<Home />} />
+                  <Route path="/products" element={<ProductList />} />
+                  <Route path="/contact" element={<Contact />} />
+                </Routes>
+            )
+          } else {
+            return (
+        <Routes>
+          <Route path="/*" element={<AuthForm name="login" displayName="Login" />} />
+          <Route path="/login" element={<AuthForm name="login" displayName="Login" />} />
+          <Route path="/signup" element={<AuthForm name="signup" displayName="Sign Up" />} />
         </Routes>
-      )}
+            )
+          }
+        })()}
     </div>
   );
 };
