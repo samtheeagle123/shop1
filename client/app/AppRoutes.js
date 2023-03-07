@@ -22,7 +22,7 @@ const AppRoutes = () => {
 
   useEffect(() => {
     dispatch(me());
-    dispatch(fetchUsersAsync)
+    dispatch(fetchUsersAsync())
   }, [dispatch]);
 
   return (
