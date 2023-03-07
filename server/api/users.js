@@ -4,25 +4,27 @@ const {
 } = require("../db");
 module.exports = router;
 
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll({
-      attributes: ["username", "firstName", "lastName"],
-    });
-    res.json(users);
+      const users = await User.findAll({
+          where: req.query,
+          attributes: ['id','firstName', 'lastName', 'username'],
+      })
+      res.json(users)
   } catch (err) {
-    next(err);
+      next(err)
   }
-});
+})
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.userId);
-    res.send(user);
+    const user = await User.findByPk(req.params.id);
+    res.json(user);
   } catch (error) {
     next(error);
   }
 });
+
 
 router.put("/:id", async (req, res, next) => {
   try {

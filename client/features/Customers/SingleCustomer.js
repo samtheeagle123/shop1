@@ -5,6 +5,7 @@ import { fetchSingleUser, editUser, selectSingleUser } from "../../Slices/single
 import EditUserForm from "./editCustomerForm";
 
 const User = () => {
+    const isAdmin = useSelector((state) => state.auth.me.isAdmin);
     const dispatch = useDispatch();
     const {userId} = useParams();
     const singleUser = useSelector(selectSingleUser)
@@ -31,20 +32,22 @@ const User = () => {
 
   return (
     <div>
-        <div id="singleUser">
-            <h3 id="userName">
-                {firstName} {lastName}
-            </h3>
-            <p>{username}</p>
-            {isEditing ? (
-          <EditUserForm user={singleUser} onCancelClick={handleCancelClick} onSaveChanges={handleSaveChanges} />
-        ) : (
-          <button onClick={handleEditClick}>Edit</button>
-        )}
-        <hr/>
-        </div>
+      <div id="singleUser">
+        <h3 id="userName">
+          {firstName} {lastName}
+        </h3>
+        <p>{username}</p>
+        {isAdmin ? (
+          isEditing ? (
+            <EditUserForm user={singleUser} onCancelClick={handleCancelClick} onSaveChanges={handleSaveChanges} />
+          ) : (
+            <button onClick={handleEditClick}>Edit</button>
+          )
+        ) : null}
+        <hr />
+      </div>
     </div>
-  )
+  );
 
 }
 
