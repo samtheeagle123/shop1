@@ -1,3 +1,4 @@
+import Button from '@mui/material/Button'
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -5,7 +6,11 @@ import {
   selectProducts,
   addToCart,
 } from "../features/displaySlice/productSlice.js";
+import { BsFillCartPlusFill } from 'react-icons/bs';
+import Stack from '@mui/material/Stack';
+import '../features/style/ProductList.css';
 import { Link } from "react-router-dom";
+import { GiMagnifyingGlass } from 'react-icons/gi';
 
 function ProductList() {
   const dispatch = useDispatch();
@@ -19,23 +24,33 @@ function ProductList() {
     dispatch(addToCart(product));
   };
 
+ 
+
   return (
-    <div>
-      <h2>Product List</h2>
-      {products.map(product => (
-        <div key={product.id}>
-          <h3>{product.Name}</h3>
-          <p>{product.Desc}</p>
-          <p>{product.Price}</p>
-          <img src={product.imageUrl}></img>
-          <Link to={`/products/${product.id}`}>View details</Link>
-          <button onClick={() => handleAddToCart(product.id)}>
-            Add to Cart
-          </button>
+        <div className="wrapper">
+          {products.map(product => (
+            <div key={product.id} className='card'>
+              <h3>{product.Name}</h3><span></span>
+              <p className="price">{product.Price}</p>
+              {/* <p className='description'>{product.Desc}</p> */}
+              <img className='product-img' src={product.imageUrl}></img>
+              <br></br>
+              <Stack direction='row'>
+              <Button onClick={() => handleAddToCart(product.id)}
+                variant="outlined">
+                <BsFillCartPlusFill />
+              </Button>
+              <Button variant="outlined">
+              <GiMagnifyingGlass><Link to={`/products/${product.id}`}></Link></GiMagnifyingGlass>
+              </Button>
+              </Stack>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
   );
 }
 
 export default ProductList;
+
+
+//
