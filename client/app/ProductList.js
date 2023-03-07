@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   fetchProductsAsync,
   selectProducts,
-  createAddProductAsync,
+  addToCart,
 } from "../features/displaySlice/productSlice.js";
 import { BsFillCartPlusFill } from 'react-icons/bs';
-
+import Stack from '@mui/material/Stack';
 import '../features/style/ProductList.css';
+import { Link } from "react-router-dom";
+import { GiMagnifyingGlass } from 'react-icons/gi';
 
 function ProductList() {
   const dispatch = useDispatch();
@@ -18,9 +20,11 @@ function ProductList() {
     dispatch(fetchProductsAsync());
   }, [dispatch]);
 
-  const handleAddToCart = (productId, orderId) => {
-    dispatch(createAddProductAsync({ productId}));
+  const handleAddToCart = product => {
+    dispatch(addToCart(product));
   };
+
+ 
 
   return (
         <div className="wrapper">
@@ -31,10 +35,15 @@ function ProductList() {
               {/* <p className='description'>{product.Desc}</p> */}
               <img className='product-img' src={product.imageUrl}></img>
               <br></br>
+              <Stack direction='row'>
               <Button onClick={() => handleAddToCart(product.id)}
                 variant="outlined">
                 <BsFillCartPlusFill />
               </Button>
+              <Button variant="outlined">
+              <GiMagnifyingGlass><Link to={`/products/${product.id}`}></Link></GiMagnifyingGlass>
+              </Button>
+              </Stack>
             </div>
           ))}
         </div>

@@ -1,6 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+export const addToCart = product => {
+  return {
+    type: "ADD_TO_CART",
+    payload: product,
+  };
+};
+
 const initialState = [];
 
 export const fetchProductsAsync = createAsyncThunk("allProducts", async () => {
@@ -11,20 +18,6 @@ export const fetchProductsAsync = createAsyncThunk("allProducts", async () => {
     console.log(err);
   }
 });
-export const createAddProductAsync = createAsyncThunk(
-  "product/add",
-  async ({ Price }) => {
-    try {
-      const { data } = await axios.post("/api/products", {
-        Price,
-      });
-      return data;
-    } catch (error) {
-      console.error("Error Adding Products!: ", error);
-      throw error; // re-throw the error to trigger the rejected state of the thunk
-    }
-  }
-);
 
 
 const productSlice = createSlice({
@@ -32,12 +25,10 @@ const productSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(fetchProductsAsync.fulfilled, (state, action) => {
-      return action.payload;
-    });
-    builder.addCase(createAddProductAsync.fulfilled, (state, action) => {
-      state.push(action.payload);
-    });
+    builder
+      .addCase(fetchProductsAsync.fulfilled, (state, action) => {
+        return action.payload;
+      })
   },
 });
 

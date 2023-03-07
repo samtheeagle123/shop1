@@ -26,40 +26,6 @@ const AppRoutes = () => {
   }, [dispatch]);
 
   return (
-    // <div>
-    //   {isLoggedIn ? (
-    //     <Routes>
-    //       <Route path="/*" element={<Home />} />
-    //       <Route to="/home" element={<Home />} />
-    //       <Route path="/products" element={<ProductList />} />
-    //       <Route path="/contact" element={<Contact />} />
-    //       <Route path="/users" element={<Users />} />
-    //       <Route path="/users/:id" element={<User userId={userId} />} />
-    //     </Routes>
-    //   ) : (
-    //     <Routes>
-    //       <Route
-    //         path="/*"
-    //         element={<AuthForm name="login" displayName="Login" />}
-    //       />
-    //       <Route
-    //         path="/login"
-    //         element={<AuthForm name="login" displayName="Login" />}
-    //       />
-    //       <Route
-    //         path="/signup"
-    //         element={<AuthForm name="signup" displayName="Sign Up" />}
-    //       />
-    //       <Route path="/products" element={<ProductList />} />
-    //       <Route path="/about" />
-    //       <Route path="/contact" />
-    //       <Route path="/cart" />
-       
-         
-    //     </Routes>
-    //   )}
-    // </div>
-
     <div>
         {(() => {
           if (isAdmin) {
