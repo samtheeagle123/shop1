@@ -8,8 +8,9 @@ const Home = (props) => {
   const username = useSelector((state) => state.auth.me.username);
 
   return (
-    <div>
-      <h3>Welcome, {username}</h3>
+    <div className='card'>
+      <h3>Welcome, {username}!</h3>
+      <p>Please enjoy our fine taste of assorted Products!</p>
     </div>
   );
 };

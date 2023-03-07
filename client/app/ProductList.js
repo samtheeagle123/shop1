@@ -1,3 +1,4 @@
+import Button from '@mui/material/Button'
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -5,6 +6,9 @@ import {
   selectProducts,
   createAddProductAsync,
 } from "../features/displaySlice/productSlice.js";
+import { BsFillCartPlusFill } from 'react-icons/bs';
+
+import '../features/style/ProductList.css';
 
 function ProductList() {
   const dispatch = useDispatch();
@@ -19,21 +23,25 @@ function ProductList() {
   };
 
   return (
-    <div>
-      <h2>Product List</h2>
-      {products.map(product => (
-        <div key={product.id}>
-          <h3>{product.Name}</h3>
-          <p>{product.Desc}</p>
-          <p>{product.Price}</p>
-          <img src={product.imageUrl}></img>
-          <button onClick={() => handleAddToCart(product.id)}>
-            Add to Cart
-          </button>
+        <div className="wrapper">
+          {products.map(product => (
+            <div key={product.id} className='card'>
+              <h3>{product.Name}</h3><span></span>
+              <p className="price">{product.Price}</p>
+              {/* <p className='description'>{product.Desc}</p> */}
+              <img className='product-img' src={product.imageUrl}></img>
+              <br></br>
+              <Button onClick={() => handleAddToCart(product.id)}
+                variant="outlined">
+                <BsFillCartPlusFill />
+              </Button>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
   );
 }
 
 export default ProductList;
+
+
+//

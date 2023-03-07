@@ -1,0 +1,18 @@
+.card {
+    border: 1px solid;
+    margin: 10px;
+    background-color: antiquewhite;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: 1px solid;
+
+  }
+
+.icons {
+    font-size: 100px;
+    align-items: center;
+    display: flex;
+  }
