@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { deleteUser , selectUsers } from '../../Slices/userSlice'
-import { useDispatch, useSelector } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Users = () => {
     const isAdmin = useSelector((state) => state.auth.me.isAdmin)
