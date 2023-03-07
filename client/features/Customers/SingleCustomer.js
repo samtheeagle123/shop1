@@ -5,7 +5,7 @@ import { fetchSingleUser, editUser, selectSingleUser } from "../../Slices/single
 import EditUserForm from "./editCustomerForm";
 
 const User = () => {
-    const dispatch = useDispatch = useDispatch();
+    const dispatch = useDispatch();
     const {userId} = useParams();
     const singleUser = useSelector(selectSingleUser)
     const{ username, firstName, lastName} = singleUser
