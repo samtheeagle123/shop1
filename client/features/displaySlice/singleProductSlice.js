@@ -3,14 +3,17 @@ import axios from "axios";
 
 const initialState = {};
 
-export const fetchSingleProduct = createAsyncThunk("singleProduct", async id => {
-  try {
-    const { data } = await axios.get(`/api/products/${id}`);
-    return data;
-  } catch (err) {
-    console.log(err);
+export const fetchSingleProduct = createAsyncThunk(
+  "singleProduct",
+  async id => {
+    try {
+      const { data } = await axios.get(`/api/products/${id}`);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
   }
-});
+);
 
 const singleProductSlice = createSlice({
   name: "singleProduct",

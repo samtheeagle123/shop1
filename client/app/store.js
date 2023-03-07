@@ -12,7 +12,7 @@ const store = configureStore({
     singleUser: singleUserSlice,
     users: userSlice,
     products: productSlice,
-    singProduct: singleProductSlice,
+    singleProduct: singleProductSlice,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
 });

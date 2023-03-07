@@ -6,25 +6,26 @@ import {
   selectSingleProduct,
 } from "../features/displaySlice/singleProductSlice";
 
-const SingleProductList = () => {
+const SingleProduct = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
 
+  const singleProduct = useSelector(selectSingleProduct);
+  const { Name, Desc, Price, imageUrl } = singleProduct;
+
   useEffect(() => {
     dispatch(fetchSingleProduct(productId));
-  }, [dispatch, productId]);
-
-  const singleProduct = useSelector(selectSingleProduct);
+  }, [dispatch]);
+  console.log(imageUrl);
 
   return (
     <div>
-      <p>hi</p>
-      <h1>Product name: {singleProduct.name}</h1>
-      <h3>Price: {singleProduct.price}</h3>
-      <h3>Description: {singleProduct.desc}</h3>
-      <img src={singleProduct.imageURL}></img>
+      <h2>{Name}</h2>
+      <p>{Desc}</p>
+      <p>{Price}</p>
+      <img src={imageUrl}></img>
     </div>
   );
 };
 
-export default SingleProductList;
+export default SingleProduct;

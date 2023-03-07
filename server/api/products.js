@@ -13,6 +13,20 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:productsId", async (req, res, next) => {
+  try {
+    const id = req.params.productsId;
+    const product = await Products.findOne({
+      where: {
+        id: id,
+      },
+    });
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // router.post("/", async (req, res, next) => {
 //   try {
 //     const { productId } = req.body;
@@ -37,29 +51,6 @@ router.post("/products", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
-  }
-});
-
-// router.get("/:productsId", async (req, res, next) => {
-//   try {
-//     const id = req.params.productsId;
-//     const product = await Products.findOne({
-//       where: {
-//         id: id,
-//       },
-//     });
-//     res.json(product);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
-router.get("/:productsId", async (req, res, next) => {
-  try {
-    const product = await Products.findByPk(req.params.id);
-    res.json(product);
-  } catch (err) {
-    next(err);
   }
 });
 
