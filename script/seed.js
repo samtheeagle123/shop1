@@ -5,15 +5,6 @@ const {
   models: { User, Product },
 } = require("../server/db");
 
-const characters =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-const generatePass = len => {
-  let result = "";
-  for (let i = 0; i < len; i++)
-    result += characters.charAt(0, characters.length - 1);
-  return result;
-};
 
 const products = [
   {
@@ -91,76 +82,87 @@ const products = [
 const users = [
   {
     username: "SmileyPenguin23",
+    password: "thorn",
     firstName: "Adrian ",
     lastName: "Greene",
+    isAdmin:true
   },
   {
     username: "TechNinja007",
+    password: "hunter",
     firstName: "Maya",
     lastName: "Patel",
+    isAdmin:false
   },
   {
     username: "HappyTurtle99",
+    password: "titan",
     firstName: "Tyler ",
     lastName: " Davis",
+    isAdmin:false
   },
   {
     username: "CaptainMarvelous",
+    password: "warlock",
     firstName: "Leah  ",
     lastName: "Kim",
+    isAdmin:true
   },
   {
     username: "BlueSapphire88",
+    password: "void",
     firstName: "Evan",
     lastName: " Nguyen ",
+    isAdmin:false,
+    
   },
   {
     username: "CosmicFalcon42",
+    password: "arc",
     firstName: "Zoe",
     lastName: " Jackson",
+    isAdmin:false
   },
   {
     username: "SilverDragonfly",
+    password: "solar",
     firstName: "Caleb ",
     lastName: "Smith",
+    isAdmin:true
   },
   {
     username: "SkyGazer21",
+    password: "stasis",
     firstName: "Ava",
     lastName: " Brown",
+    isAdmin:false
   },
   {
     username: "OceanBreeze77",
+    password: "strand",
     firstName: "Ryan",
     lastName: " Lee",
+    isAdmin:false
   },
   {
     username: "Thunderbolt54",
+    password: "light",
     firstName: "Mia",
     lastName: " Thompson",
+    isAdmin:true
   },
 ];
 
-const roles = ["ADMIN", "DEVELOPER", "CUSTOMER"];
 
-users.forEach(m => {
-  m.role = roles[(0, roles.length - 1)];
-  m.password = generatePass(10);
-});
-/**
- * seed - this function clears the database, updates tables to
- *      match the models, and populates the database.
- */
 async function seed() {
-  await db.sync({ force: true }); // clears db and matches models to tables
+  await db.sync({ force: true }); 
   console.log("db synced!");
 
   // Creating Users
-  const users = await Promise.all([
-    User.create({ username: "cody", password: "123" }),
-    User.create({ username: "murphy", password: "123" }),
-  ]);
-  console.log(`seeded ${users.length} users`);
+  const newUsers = await Promise.all(users.map((user)=>{
+    return User.create(user)
+  }))
+  console.log(`seeded ${newUsers.length} users`);
 
   console.log(products);
 
